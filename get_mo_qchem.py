@@ -16,7 +16,7 @@ import os
 import CCParser as ccp
 import numpy as np
 
-def get_qchem_coeffs(xyz, basname, print_orbitals=20):
+def get_qchem_coeffs(xyz, basname, print_orbitals=50):
     root = os.getcwd()
     basfile = basname + ".bas"
     meta_HF  = dict(method="HF", status=None, basename="HF")
