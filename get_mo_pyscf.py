@@ -11,8 +11,8 @@ import sys
 from pyscf import scf, gto
 
 
-def get_pyscf_coeffs(xyz, basfile):
-    basname = basfile.replace(".nwchem", "")
+def get_pyscf_coeffs(xyz, basname):
+    basfile = basname + ".nwchem"
     with open(basfile, "r") as f:
         bas = f.read()
     mol = gto.M(atom=xyz, basis=bas)
@@ -24,5 +24,5 @@ def get_pyscf_coeffs(xyz, basfile):
     return coeffs
 
 if __name__ == "__main__":
-    _, xyz, basfile = sys.argv
-    get_pyscf_coeffs(xyz, basfile)
+    _, xyz, basname = sys.argv
+    get_pyscf_coeffs(xyz, basname)

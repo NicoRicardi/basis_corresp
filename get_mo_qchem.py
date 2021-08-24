@@ -14,9 +14,9 @@ import slurm_stuff_baobab as slrm
 import sys
 import os
 
-def get_qchem_coeffs(xyz, basfile, print_orbitals=20):
+def get_qchem_coeffs(xyz, basname, print_orbitals=20):
     root = os.getcwd()
-    basname = basfile.replace(".nwchem", "")
+    basfile = basname + ".bas"
     meta_HF  = dict(method="HF", status=None, basename="HF")
     meta_HF["path"] = os.path.join(root, basname)
     already_done = ut.status_ok(path=meta_HF["path"])
@@ -43,5 +43,5 @@ def get_qchem_coeffs(xyz, basfile, print_orbitals=20):
         ut.save_status(meta_HF)
 
 if __name__ == "__main__":
-    _, xyz, basfile = sys.argv
-    get_qchem_coeffs(xyz, basfile)
+    _, xyz, basname = sys.argv
+    get_qchem_coeffs(xyz, basname)
