@@ -13,12 +13,14 @@ from CCJob.Composable_templates import Tdefaults, Tinp, Trem_kw, Tmolecule, Tbas
 import slurm_stuff_baobab as slrm
 import sys
 import os
+import CCParser as ccp
+import numpy as np
 
 def get_qchem_coeffs(xyz, basname, print_orbitals=20):
     root = os.getcwd()
     basfile = basname + ".bas"
     meta_HF  = dict(method="HF", status=None, basename="HF")
-    meta_HF["path"] = os.path.join(root, basname)
+    meta_HF["path"] = os.path.join(root, "qchem")
     already_done = ut.status_ok(path=meta_HF["path"])
     if already_done == False:
         memory = 14000
@@ -41,7 +43,15 @@ def get_qchem_coeffs(xyz, basname, print_orbitals=20):
                 batch_mode=False)  # because we want to extract data and copy matrices
         
         ut.save_status(meta_HF)
-
+    if not os.path.isfile(os.path.join(meta_HF["path"], "CCParser.json")):  # generally it is there because of save_status
+        ccp.Parser(os.path.join(meta_HF["path"], meta_HF["basename"]+".out"),
+                                to_json=True, to_console=False, json_file="CCParser.json",
+                                large_fn="matrices.npz")
+    d = ut.load_js(os.path.join(meta_HF["path"], "CCParser.json"))
+    coeffs = d["C"][-1][0]
+    if type(coeffs) == str:
+        coeffs = np.load(os.path.join(meta_HF["path"], coeffs), allow_pickle=True)["C"][-1]
+    np.savetxt("{}_coeffs_qchem.txt".format(basname), coeffs)
 if __name__ == "__main__":
     _, xyz, basname = sys.argv
     get_qchem_coeffs(xyz, basname)
