@@ -17,13 +17,13 @@ import os
 def get_qchem_coeffs(xyz, basfile, print_orbitals=20):
     root = os.getcwd()
     basname = basfile.replace(".nwchem", "")
-    meta_HF  = dict(method="HF", status=None, basename="mp2")
+    meta_HF  = dict(method="HF", status=None, basename="HF")
     meta_HF["path"] = os.path.join(root, basname)
     already_done = ut.status_ok(path=meta_HF["path"])
     if already_done == False:
         memory = 14000
         bs_kw = "gen"  
-        bs_string = ut.read_file("aug-cc-pVDZ.bas")
+        bs_string = ut.read_file(basfile)
         if bs_string[-1] == "\n":
             bs_string = bs_string[:-1]
         rem_extras = ["thresh = 14", "basis_lin_dep_thresh = 5"]
@@ -36,7 +36,7 @@ def get_qchem_coeffs(xyz, basfile, print_orbitals=20):
         coords = "".join(lines[2:])
         molecule = Tmolecule.substitute(Tdefaults["molecule"], **dict(xyz=coords))
         specs_HF = ut.myupd(Tdefaults["inp"], rem_kw=rem_kw, molecule=molecule, extras=extra_basic)
-        queue_HF = dict(** slrm.shabug_M)  
+        queue_HF = dict(** slrm.shabug_S)  
         ut.run_job(specs_HF, queue_HF, meta_HF, Tinp,  
                 batch_mode=False)  # because we want to extract data and copy matrices
         
