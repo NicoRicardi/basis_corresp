@@ -104,7 +104,7 @@ for c in atm_numbers:
         assert (list(map(int,np.argmin(d_arr,axis=1))) == js_o[ID]), "BIG ISSUE!! two centers of atomic weight "+str(c)+" have different assignment!!"
     js_o[ID] = list(map(int,np.argmin(d_arr,axis=1)))
 
-d=dict(source="chem", destination="pysf", basisname="cc-pVDZ(seg-opt)" ,
+d=dict(source="qchem", destination="pysf", basisname="cc-pVDZ(seg-opt)" ,
                    basisfile=nwchem, order=js_o)
 with open(os.path.join(root,"{}.corr".format(basname)),"w") as f:
     js.dump(d,f)
