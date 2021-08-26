@@ -101,10 +101,10 @@ for c in atm_numbers:
             d_arr[j] += abs(p_slc[i,j] - q_slc[i,:])
     ID= "p{}".format(md.element(int(c)).period) if rows_equal else md.element(int(c)).symbol
     if ID in js_o.keys():
-        assert (list(map(int,np.argmin(d_arr,axis=1))) == js_o[ID]), "BIG ISSUE!! two centers of atomic weight "+str(c)+" have different assignment!!"
-    js_o[ID] = list(map(int,np.argmin(d_arr,axis=1)))
+        assert (list(map(int,np.argmin(d_arr, axis=1))) == js_o[ID]), "BIG ISSUE!! two centers of atomic weight "+str(c)+" have different assignment!!"
+    js_o[ID] = list(map(int,np.argmin(d_arr, axis=1)))
 
-d=dict(source="qchem", destination="pysf", basisname="cc-pVDZ(seg-opt)" ,
+d=dict(source="qchem", destination="pyscf", basisname="cc-pVDZ(seg-opt)" ,
                    basisfile=nwchem, order=js_o)
 with open(os.path.join(root,"{}.corr".format(basname)),"w") as f:
     js.dump(d,f)
