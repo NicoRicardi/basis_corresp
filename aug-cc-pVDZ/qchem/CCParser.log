@@ -1,0 +1,27 @@
+==[2021-08-26 21:17:58,298]== CCParser starts...
+[results.elconf] Parsed input elconf(s)
+[results.frag_xyz] Parsed input molecule(s)
+[results.xyz] Parsed XYZ coordinates
+[results.nuc_rep] Parsed nuclear repulsion energy
+[results.n_occ] Parsed number of occupied MOs (a, b)
+[results.bas_name] Parsed basis set name
+[results.nbas] Parsed number of basis functions
+[results.cycle_energies] Parsed SCF energies at each cycle
+[results.one_electron] Parsed SCF breakdown in [a.u.]
+[results.tot_coulomb] Parsed SCF breakdown in [a.u.]
+[results.alpha_exc] Parsed SCF breakdown in [a.u.]
+[results.beta_exc] Parsed SCF breakdown in [a.u.]
+[results.dft_exc] Parsed SCF breakdown in [a.u.]
+[results.dft_corr] Parsed SCF breakdown in [a.u.]
+[results.nuc_repu] Parsed SCF breakdown in [a.u.]
+[results.nuc_attr] Parsed SCF breakdown in [a.u.]
+[results.kin_energy] Parsed SCF breakdown in [a.u.]
+[results.scf_energy] Parsed SCF energy in [a.u.]
+[results.mo_energies] Parsed molecular orbital energies
+[results.C] Parsed 59 molecular orbital coefficients
+[results.mulliken] Parsed Ground-State Mulliken charges
+[results.has_finished] Parsed whether Q-Chem has finished successfully
+==[2021-08-26 21:17:58,634]== Dumped CCParser.results to JSON file.
+==[2021-08-26 21:17:58,655]== Dumped large arrays from CCParser.results to .npz file.                                    
+ NB: numpy Warning is unavoidable.
+==[2021-08-26 21:17:58,655]== CCParser has finished.

@@ -52,6 +52,7 @@ def get_qchem_coeffs(xyz, basname, print_orbitals=50):
     if type(coeffs) == str:
         coeffs = np.load(os.path.join(meta_HF["path"], coeffs), allow_pickle=True)["C"][-1]
     np.savetxt("{}_coeffs_qchem.txt".format(basname), coeffs)
+
 if __name__ == "__main__":
     _, xyz, basname = sys.argv
     get_qchem_coeffs(xyz, basname)

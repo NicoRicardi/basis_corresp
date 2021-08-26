@@ -1,0 +1,1 @@
+/home/share/wesolowski/qc5.trunk/exe/qcprog.exe .HF.in.134006.qcin.1 /srv/beegfs/scratch/users/r/ricardi/qchem134006/

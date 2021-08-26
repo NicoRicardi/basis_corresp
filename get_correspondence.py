@@ -58,16 +58,17 @@ if not os.path.isfile(os.path.join(root, basname, basfile)):
                                 asking for format \"gaussian\", or in your $QCAUX")          
 # getting coeffs 
 os.chdir(basname)
-pcoeff_file = "{}_coeffs_qchem.txt".format(basname)
-qcoeff_file = "{}_coeffs_pyscf.txt".format(basname)
+qcoeff_file = "{}_coeffs_qchem.txt".format(basname)
+pcoeff_file = "{}_coeffs_pyscf.txt".format(basname)
 if not os.path.isfile(pcoeff_file):
     from get_mo_pyscf import get_pyscf_coeffs
     get_pyscf_coeffs(xyz, basname)
 if not os.path.isfile(qcoeff_file):
-    from get_mo_chem import get_qchem_coeffs
+    print("getting qchem coefficients")
+    from get_mo_qchem import get_qchem_coeffs
     get_qchem_coeffs(xyz, basname)   
-pcoeffs = abs(np.loadtxt(pcoeff_file))  # abs because phase can change
-qcoeffs = abs(np.loadtxt(qcoeff_file).T) # transpose so that it is [MO, basis_func]
+qcoeffs = abs(np.loadtxt(qcoeff_file)) # abs because phase can change
+pcoeffs = abs(np.loadtxt(pcoeff_file).T)  # transpose so that it is [MO, basis_func]
 
 # let's go!
 with open(nwchem, "r") as f:
